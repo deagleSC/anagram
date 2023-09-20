@@ -4,9 +4,15 @@ import LetterContainer from "./LetterContainer";
 
 const Anagram = ({anagram, blanks, anagramOptions}) => {
 
+    let colorArray = []
+    anagram.map((item) => {
+        colorArray.push("blue")
+    })
+
     const [options, setOptions] = useState(anagramOptions)
     const [blankInputs, setBlankInputs] = useState(blanks)
     const [success, setSuccess] = useState(false)
+    const [colors, setColors] = useState(colorArray)
 
     const handleRemove = (item, index) => {
         if (blanks[index] != "-" || item == "-") return
@@ -18,17 +24,36 @@ const Anagram = ({anagram, blanks, anagramOptions}) => {
 
         setBlankInputs(temp)
         setOptions(temp2)
+
+        let success = 1
+        for (let i = 0; i<anagram.length; i++) {
+            if (blankInputs[i] != anagram[i]
+        && !(blankInputs[i] == "-" && anagram[i] == item)
+                ) {
+                success = 0
+                break;
+            }
+        }
+
+        if (success) setSuccess(true)
+        else setSuccess(false)
     }
 
-    const handleClick = (option) => {
+    const handleClick = (option, index) => {
+
+        let tempColors = [...colors]
+
         let temp = [...blankInputs]
         for (let i=0; i<temp.length; i++) {
             if (temp[i] == "-") {
                 temp[i] = option 
+                tempColors[i] = "pink"
                 console.log("found")
                 break
             }
         }
+
+        setColors(tempColors)
 
         let temp2 = [...options]
         let newTemp2 = []
@@ -57,19 +82,25 @@ const Anagram = ({anagram, blanks, anagramOptions}) => {
         }
 
         if (success) setSuccess(true)
+        else setSuccess(false)
     }    
 
     return ( 
-        <div className="Anagra">
+        <div className="Anagram">
         <div className="top"
         key={blankInputs}
         >
         {blankInputs.map((item, index) => ( 
             <div
-            key={blankInputs}
-            onClick={() => handleRemove(item, index)}
+            key={colors}
+        
+            onClick={() => {
+                handleRemove(item, index)
+            }}
+
+            // style={{backgroundColor: colors[index]}}
             >
-                <LetterContainer letter={item} />
+                <LetterContainer letter={item} color={colors[index]}/>
             </div>
         ))}
         </div>
@@ -77,9 +108,11 @@ const Anagram = ({anagram, blanks, anagramOptions}) => {
         <div className="bottom">
         {options.map((item, index) => ( 
             <div
-            onClick={() => handleClick(item)}
+            onClick={() => {
+                handleClick(item, index)
+            }}
             >
-                <LetterContainer letter={item} />
+                <LetterContainer letter={item} color={"blue"} />
             </div>
         ))}
         </div>

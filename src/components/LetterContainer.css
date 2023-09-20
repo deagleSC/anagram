@@ -1,3 +1,10 @@
 .letterContainer {
-    padding: 10px;
+    padding: 10px 20px 10px 20px;
+    /* background-color: rgb(87, 87, 255); */
+    margin: 10px;
+    color: white;
+}
+
+.letterContainer:hover {
+    cursor: pointer;
 }

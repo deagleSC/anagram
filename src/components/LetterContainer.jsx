@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './LetterContainer.css';
 
-const LetterContainer = ({letter}) => {
+const LetterContainer = ({letter, color, changedColor}) => {
+
+    const [background, setBackground] = useState(color)
+
     return ( 
-        <div className='letterContainer'>
+        <div className='letterContainer'
+        style={{backgroundColor: color}}
+        >
             <span>{letter}</span>
         </div>
     )
