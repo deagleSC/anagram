@@ -30,18 +30,7 @@ const Anagram = ({anagram, blanks, anagramOptions}) => {
         setBlankInputs(temp)
         setOptions(temp2)
 
-        let success = 1
-        for (let i = 0; i<anagram.length; i++) {
-            if (blankInputs[i] != anagram[i]
-        && !(blankInputs[i] == "-" && anagram[i] == item)
-                ) {
-                success = 0
-                break;
-            }
-        }
-
-        if (success) setSuccess(true)
-        else setSuccess(false)
+        setSuccess(false)
     }
 
     const handleClick = (option, index) => {
