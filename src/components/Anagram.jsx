@@ -15,9 +15,14 @@ const Anagram = ({anagram, blanks, anagramOptions}) => {
     const [colors, setColors] = useState(colorArray)
 
     const handleRemove = (item, index) => {
+
+        let tempColors = [...colors]
+
         if (blanks[index] != "-" || item == "-") return
         let temp = [...blankInputs]
         temp[index] = "-"
+        tempColors[index] = "blue"
+        setColors(tempColors)
 
         let temp2 = [...options]
         temp2.push(item)
