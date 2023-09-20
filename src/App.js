@@ -15,9 +15,9 @@ function App() {
     <div className="App">
       
       <Anagram 
-      anagram={["O", "R", "A", "N", "G", "E"]}
-      blanks={["O", "-", "-", "N", "-", "E"]}
-      anagramOptions={["A", "R", "P", "G", "L", "Z", "Y"]}
+      anagram={["A", "P", "P", "L", "E"]}
+      blanks={["A", "-", "-", "L", "-"]}
+      anagramOptions={["A", "P", "P", "E", "L", "Z", "Y"]}
       />
     </div>
   );
