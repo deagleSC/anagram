@@ -8,6 +8,18 @@ const Anagram = ({anagram, blanks, anagramOptions}) => {
     const [blankInputs, setBlankInputs] = useState(blanks)
     const [success, setSuccess] = useState(false)
 
+    const handleRemove = (item, index) => {
+        if (blanks[index] != "-" || item == "-") return
+        let temp = [...blankInputs]
+        temp[index] = "-"
+
+        let temp2 = [...options]
+        temp2.push(item)
+
+        setBlankInputs(temp)
+        setOptions(temp2)
+    }
+
     const handleClick = (option) => {
         let temp = [...blankInputs]
         for (let i=0; i<temp.length; i++) {
@@ -40,7 +52,7 @@ const Anagram = ({anagram, blanks, anagramOptions}) => {
         && !(blankInputs[i] == "-" && anagram[i] == option)
                 ) {
                 success = 0
-                break
+                break;
             }
         }
 
@@ -55,6 +67,7 @@ const Anagram = ({anagram, blanks, anagramOptions}) => {
         {blankInputs.map((item, index) => ( 
             <div
             key={blankInputs}
+            onClick={() => handleRemove(item, index)}
             >
                 <LetterContainer letter={item} />
             </div>
